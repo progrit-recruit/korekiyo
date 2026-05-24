@@ -11,6 +11,8 @@ import { Colors } from "../../constants/theme"
 const { width } = Dimensions.get("window")
 const ITEM_W = (width - 52) / 2
 const STORAGE_KEY = "user_closet"
+const CLOSET_VERSION = "v2"
+const VERSION_KEY = "user_closet_version"
 
 type ClothingItem = {
   id: string
@@ -45,10 +47,17 @@ export default function ClosetScreen() {
   const [selectedIds, setSelectedIds] = useState<string[]>([])
 
   useEffect(() => {
-    AsyncStorage.getItem(STORAGE_KEY).then(data => {
-      setClothes(data ? JSON.parse(data) : MOCK_CLOTHES)
+    ;(async () => {
+      const version = await AsyncStorage.getItem(VERSION_KEY)
+      const data = await AsyncStorage.getItem(STORAGE_KEY)
+      if (!data || version !== CLOSET_VERSION) {
+        await AsyncStorage.setItem(VERSION_KEY, CLOSET_VERSION)
+        setClothes(MOCK_CLOTHES)
+      } else {
+        setClothes(JSON.parse(data))
+      }
       setLoaded(true)
-    })
+    })()
   }, [])
 
   useEffect(() => {
