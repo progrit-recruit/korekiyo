@@ -139,19 +139,19 @@ export const MOCK_OUTFITS = [
 ]
 
 export const MOCK_RECOMMENDATIONS = [
-  { id: "r1", name: "リネンブレンドシャツ", brand: "ZARA", price: 5990, image: "https://images.unsplash.com/photo-1602810319428-019690571b5b?w=300&q=80" },
-  { id: "r2", name: "ワイドデニム", brand: "GU", price: 3990, image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=300&q=80" },
-  { id: "r3", name: "クロップドニット", brand: "H&M", price: 2990, image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=300&q=80" },
-  { id: "r4", name: "マキシフレアスカート", brand: "SHEIN", price: 1999, image: "https://images.unsplash.com/photo-1594938298603-c8148c4b5fa8?w=300&q=80" },
-  { id: "r5", name: "バケットハット", brand: "Champion", price: 3500, image: "https://images.unsplash.com/photo-1521369909029-2afed882baee?w=300&q=80" },
+  { id: "r1", name: "Garden Hoodie", brand: "Golf Wang", price: 16200, image: "https://golfwang.com/cdn/shop/files/Golfwang69ea70dbc74da469ea70dbc764c.8747596369ea70dbc764c.jpg?v=1776972068&width=400" },
+  { id: "r2", name: "G-7 Cargo Pant", brand: "Golf Wang", price: 16200, image: "https://golfwang.com/cdn/shop/files/Golfwang69ea83e89d0c4269ea83e89d18b.7880038569ea83e89d18b.jpg?v=1776976973&width=400" },
+  { id: "r3", name: "Tucker Button Down", brand: "Golf Wang", price: 14800, image: "https://golfwang.com/cdn/shop/files/Golfwang69ea8374486d9669ea837448b1b.1252492569ea837448b1b.jpg?v=1776976822&width=400" },
+  { id: "r4", name: "Dante Hoodie", brand: "Golf Wang", price: 16200, image: "https://golfwang.com/cdn/shop/files/Golfwang69ea6f9fa2e1741453132869ea6f9fa2e1e.69ea6f9fa2e1e.jpg?v=1776971892&width=400" },
+  { id: "r5", name: "Norkin Quarter Zip", brand: "Golf Wang", price: 14800, image: "https://golfwang.com/cdn/shop/files/Golfwang694318a0275802694318a02776d.56078988694318a02776d.jpg?v=1770841297&width=400" },
 ]
 
 export const MOCK_RANKING = [
-  { rank: 1, name: "オーバーサイズTシャツ", brand: "Uniqlo", likes: 2341, image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&q=80" },
-  { rank: 2, name: "バギーデニム", brand: "WEGO", likes: 1987, image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=300&q=80" },
-  { rank: 3, name: "プラットフォームサンダル", brand: "ZARA", likes: 1654, image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=300&q=80" },
-  { rank: 4, name: "リブニットカーデ", brand: "GU", likes: 1423, image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=300&q=80" },
-  { rank: 5, name: "メッシュバレエシューズ", brand: "H&M", likes: 1201, image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=80" },
+  { rank: 1, name: "Airborne Jacket", brand: "Golf Wang", likes: 2341, image: "https://golfwang.com/cdn/shop/files/Golfwang69eaaac10ef20269eaaac10f14d.0371665869eaaac10f14d.jpg?v=1776986832&width=400" },
+  { rank: 2, name: "Rockwell Varsity Jacket", brand: "Golf Wang", likes: 1987, image: "https://golfwang.com/cdn/shop/files/Golfwang69448ce312234569448ce312489.7050480169448ce312489.jpg?v=1770841277&width=400" },
+  { rank: 3, name: "Crush Denim Jacket", brand: "Golf Wang", likes: 1654, image: "https://golfwang.com/cdn/shop/files/Golfwang698b93b5883909698b93b58860d.80882214698b93b58860d_5f5f025e-5530-439b-af7b-bb0840b868c4.jpg?v=1774986972&width=400" },
+  { rank: 4, name: "Dante Quilted Bomber", brand: "Golf Wang", likes: 1423, image: "https://golfwang.com/cdn/shop/files/Golfwang69ea84393d9ed469ea84393dacb.3683027669ea84393dacb.jpg?v=1776977051&width=400" },
+  { rank: 5, name: "Freshman Sweatpant", brand: "Golf Wang", likes: 1201, image: "https://golfwang.com/cdn/shop/files/Golfwang69ea83b861ef9469ea83b861ffe.1264078069ea83b861ffe.jpg?v=1776976927&width=400" },
 ]
 
 export const MOCK_TIMELINE = [

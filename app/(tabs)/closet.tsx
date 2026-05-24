@@ -11,7 +11,7 @@ import { Colors } from "../../constants/theme"
 const { width } = Dimensions.get("window")
 const ITEM_W = (width - 52) / 2
 const STORAGE_KEY = "user_closet"
-const CLOSET_VERSION = "v2"
+const CLOSET_VERSION = "v3"
 const VERSION_KEY = "user_closet_version"
 
 type ClothingItem = {
@@ -24,12 +24,12 @@ type ClothingItem = {
 }
 
 const MOCK_CLOTHES: ClothingItem[] = [
-  { id: "c1", image: "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=300&q=80", name: "ベージュトレンチコート", category: "アウター", color: "ベージュ", brand: "kastane" },
-  { id: "c2", image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=300&q=80", name: "ブラックフレアスカート", category: "ボトムス", color: "ブラック", brand: "PAL CLOSET" },
-  { id: "c3", image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=300&q=80", name: "ホワイトリブニット", category: "トップス", color: "ホワイト", brand: "LOWRYS FARM" },
-  { id: "c4", image: "https://images.unsplash.com/photo-1550639525-c97d455acf70?w=300&q=80", name: "ブラックプリーツスカート", category: "ボトムス", color: "ブラック", brand: "kastane" },
-  { id: "c5", image: "https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=300&q=80", name: "ホワイトフラワーブラウス", category: "トップス", color: "ホワイト", brand: "LOWRYS FARM" },
-  { id: "c6", image: "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?w=300&q=80", name: "グレーニットカーデ", category: "トップス", color: "グレー", brand: "PAL CLOSET" },
+  { id: "c1", image: "https://golfwang.com/cdn/shop/files/Golfwang69eaaac10ef20269eaaac10f14d.0371665869eaaac10f14d.jpg?v=1776986832&width=400", name: "Airborne Jacket", category: "アウター", color: "ブラック", brand: "Golf Wang" },
+  { id: "c2", image: "https://golfwang.com/cdn/shop/files/Golfwang69ea83e89d0c4269ea83e89d18b.7880038569ea83e89d18b.jpg?v=1776976973&width=400", name: "G-7 Cargo Pant", category: "ボトムス", color: "ブラック", brand: "Golf Wang" },
+  { id: "c3", image: "https://golfwang.com/cdn/shop/files/Golfwang69ea8374486d9669ea837448b1b.1252492569ea837448b1b.jpg?v=1776976822&width=400", name: "Tucker Button Down", category: "トップス", color: "ピンク", brand: "Golf Wang" },
+  { id: "c4", image: "https://golfwang.com/cdn/shop/files/Golfwang69ea70dbc74da469ea70dbc764c.8747596369ea70dbc764c.jpg?v=1776972068&width=400", name: "Garden Hoodie", category: "トップス", color: "クリーム", brand: "Golf Wang" },
+  { id: "c5", image: "https://golfwang.com/cdn/shop/files/Golfwang69ea83e87f42e869ea83e87f513.3098784169ea83e87f513.jpg?v=1776976973&width=400", name: "G-7 Cargo Pant Sand", category: "ボトムス", color: "サンド", brand: "Golf Wang" },
+  { id: "c6", image: "https://golfwang.com/cdn/shop/files/Golfwang69ea6f9fa2e1741453132869ea6f9fa2e1e.69ea6f9fa2e1e.jpg?v=1776971892&width=400", name: "Dante Hoodie", category: "トップス", color: "ブラック", brand: "Golf Wang" },
 ]
 
 const CATEGORIES = ["すべて", "トップス", "ボトムス", "アウター", "シューズ", "バッグ", "アクセ"]
