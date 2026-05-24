@@ -128,6 +128,7 @@ export default function HomeScreen() {
   const [weather, setWeather] = useState<WeatherInfo | null>(null)
   const [filteredRecs, setFilteredRecs] = useState(MOCK_RECOMMENDATIONS)
   const [likedRecs, setLikedRecs] = useState<string[]>([])
+  const [dislikedRecs, setDislikedRecs] = useState<string[]>([])
 
   useEffect(() => {
     ;(async () => {
@@ -140,6 +141,10 @@ export default function HomeScreen() {
 
       const savedLikedRecs = await AsyncStorage.getItem("liked_recommendations")
       if (savedLikedRecs) setLikedRecs(JSON.parse(savedLikedRecs))
+
+      const savedDislikedRecs = await AsyncStorage.getItem("disliked_recommendations")
+      const dislikedIds: string[] = savedDislikedRecs ? JSON.parse(savedDislikedRecs) : []
+      setDislikedRecs(dislikedIds)
 
       const g = ((await AsyncStorage.getItem("user_gender")) ?? "female") as "female" | "male"
       const closet = await AsyncStorage.getItem("user_closet")
@@ -156,13 +161,11 @@ export default function HomeScreen() {
         ])
       }
 
-      // クローゼット内アイテム名セット → おすすめから除外
+      // クローゼット内アイテム名 & 👎済みアイテム → おすすめから除外
       const closetNames = new Set(closetItems.map((i) => i.name ?? "").filter(Boolean))
-      if (closetNames.size > 0) {
-        setFilteredRecs(MOCK_RECOMMENDATIONS.filter(r => !closetNames.has(r.name)))
-      } else {
-        setFilteredRecs(MOCK_RECOMMENDATIONS)
-      }
+      setFilteredRecs(MOCK_RECOMMENDATIONS.filter(r =>
+        !closetNames.has(r.name) && !dislikedIds.includes(r.id)
+      ))
     })()
   }, [])
 
@@ -200,10 +203,19 @@ export default function HomeScreen() {
     await AsyncStorage.setItem("selected_outfit_data", JSON.stringify(outfit))
   }
 
-  async function toggleLikeRec(id: string) {
-    const next = likedRecs.includes(id) ? likedRecs.filter(x => x !== id) : [...likedRecs, id]
+  async function thumbsUpRec(id: string) {
+    const next = likedRecs.includes(id)
+      ? likedRecs.filter(x => x !== id)
+      : [...likedRecs, id]
     setLikedRecs(next)
     await AsyncStorage.setItem("liked_recommendations", JSON.stringify(next))
+  }
+
+  async function thumbsDownRec(id: string) {
+    const next = [...dislikedRecs, id]
+    setDislikedRecs(next)
+    setFilteredRecs(prev => prev.filter(r => r.id !== id))
+    await AsyncStorage.setItem("disliked_recommendations", JSON.stringify(next))
   }
 
   const currentMood = MOODS.find(m => m.level === mood)
@@ -325,23 +337,29 @@ export default function HomeScreen() {
             const isLiked = likedRecs.includes(item.id)
             return (
               <View key={item.id} style={s.recCard}>
-                <View>
-                  <Image source={{ uri: item.image }} style={s.recImg} resizeMode="cover" />
-                  <TouchableOpacity
-                    style={[s.recHeartBtn, isLiked && s.recHeartBtnLiked]}
-                    onPress={() => toggleLikeRec(item.id)}
-                  >
-                    <Ionicons
-                      name={(isLiked ? "heart" : "heart-outline") as any}
-                      size={16}
-                      color={isLiked ? "#fff" : Colors.primary}
-                    />
-                  </TouchableOpacity>
-                </View>
+                <Image source={{ uri: item.image }} style={s.recImg} resizeMode="cover" />
                 <View style={s.recInfo}>
                   <Text style={s.recBrand}>{item.brand}</Text>
                   <Text style={s.recName} numberOfLines={2}>{item.name}</Text>
                   <Text style={s.recPrice}>¥{item.price.toLocaleString()}</Text>
+                  <View style={s.recActions}>
+                    <TouchableOpacity
+                      style={[s.recActionBtn, isLiked && s.recActionBtnUp]}
+                      onPress={() => thumbsUpRec(item.id)}
+                    >
+                      <Ionicons
+                        name={"thumbs-up" as any}
+                        size={14}
+                        color={isLiked ? "#fff" : Colors.primary}
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[s.recActionBtn, s.recActionBtnDown]}
+                      onPress={() => thumbsDownRec(item.id)}
+                    >
+                      <Ionicons name={"thumbs-down" as any} size={14} color={Colors.textMuted} />
+                    </TouchableOpacity>
+                  </View>
                 </View>
               </View>
             )
@@ -408,18 +426,18 @@ const s = StyleSheet.create({
   recScroll: { paddingHorizontal: 20, gap: 12, paddingBottom: 4 },
   recCard: { width: 140, backgroundColor: Colors.surface, borderRadius: 16, overflow: "hidden", borderWidth: 1, borderColor: Colors.border },
   recImg: { width: "100%", height: 140 },
-  recHeartBtn: {
-    position: "absolute", top: 8, right: 8,
-    backgroundColor: "rgba(255,255,255,0.75)",
-    borderRadius: 16, padding: 6,
-  },
-  recHeartBtnLiked: {
-    backgroundColor: Colors.primary,
-  },
   recInfo: { padding: 10 },
   recBrand: { fontSize: 10, color: Colors.primary, fontWeight: "700", marginBottom: 2 },
   recName: { fontSize: 12, color: Colors.text, fontWeight: "600", lineHeight: 16, marginBottom: 4 },
-  recPrice: { fontSize: 13, color: Colors.text, fontWeight: "800" },
+  recPrice: { fontSize: 13, color: Colors.text, fontWeight: "800", marginBottom: 8 },
+  recActions: { flexDirection: "row", gap: 8 },
+  recActionBtn: {
+    flex: 1, paddingVertical: 6, borderRadius: 10,
+    borderWidth: 1.5, borderColor: Colors.border,
+    alignItems: "center", justifyContent: "center",
+  },
+  recActionBtnUp: { borderColor: Colors.primary, backgroundColor: Colors.primary },
+  recActionBtnDown: { borderColor: Colors.border },
   // Modal
   overlay: { flex: 1, justifyContent: "flex-end", backgroundColor: "rgba(0,0,0,0.45)" },
   sheet: { backgroundColor: "#fff", borderTopLeftRadius: 28, borderTopRightRadius: 28, padding: 28, paddingBottom: 48 },
