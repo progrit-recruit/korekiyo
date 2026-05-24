@@ -27,20 +27,32 @@ export const BODY_TYPES = ["ストレート", "ウェーブ", "ナチュラル"]
 export const PERSONAL_COLORS = ["スプリング", "サマー", "オータム", "ウィンター"]
 export const FACE_TYPES = ["フレッシュ", "キュート", "フェミニン", "クール", "エレガント", "ハンサム"]
 
-// 女性向けスタイル（PAL CLOSET コーデ）
+// 女性向けスタイル（PAL CLOSET スタッフコーディネート）
 export const FEMALE_STYLES = [
-  { id: "f1",  image: "https://contents.palcloset.jp/static/images/contents/all_260522_001.jpg", style: "夏先取り" },
-  { id: "f2",  image: "https://contents.palcloset.jp/static/images/contents/all_260521_001.jpg", style: "大人カジュアル" },
-  { id: "f3",  image: "https://contents.palcloset.jp/static/images/contents/all_260520_001.jpg", style: "ワンピース" },
-  { id: "f4",  image: "https://contents.palcloset.jp/static/images/contents/all_260519_001.jpg", style: "着やせコーデ" },
-  { id: "f5",  image: "https://contents.palcloset.jp/static/images/contents/all_260518_001.jpg", style: "ナチュラル" },
-  { id: "f6",  image: "https://contents.palcloset.jp/static/images/contents/all_260517_001.jpg", style: "フレンチカジュアル" },
-  { id: "f7",  image: "https://contents.palcloset.jp/static/images/contents/all_260516_001.jpg", style: "きれいめ" },
-  { id: "f8",  image: "https://contents.palcloset.jp/static/images/contents/all_260515_001.jpg", style: "スタイルアップ" },
-  { id: "f9",  image: "https://contents.palcloset.jp/static/images/contents/all_260514_001.jpg", style: "ガーリー" },
-  { id: "f10", image: "https://contents.palcloset.jp/static/images/contents/all_260513_001.jpg", style: "モノトーン" },
-  { id: "f11", image: "https://contents.palcloset.jp/static/images/contents/all_260512_001.jpg", style: "オフィスカジュアル" },
-  { id: "f12", image: "https://contents.palcloset.jp/static/images/contents/all_260511_001.jpg", style: "シンプル" },
+  { id: "f1",  image: "https://static.staff-start.com/img/coordinates/17/7928cdc9a5040872be11e87e9bef1d67-109383/2c6418ca28977c929b851b15fb2d0c36.jpg", style: "プチプラコーデ" },
+  { id: "f2",  image: "https://static.staff-start.com/img/coordinates/17/532b7cbe070a3579f424988a040752f2-3113/3188d26a94ab590065d3b22cf087fc24.jpg", style: "大人カジュアル" },
+  { id: "f3",  image: "https://static.staff-start.com/img/coordinates/17/7928cdc9a5040872be11e87e9bef1d67-109383/d0e6daae67662cedf31cea87122ae0da.jpg", style: "デニムコーデ" },
+  { id: "f4",  image: "https://static.staff-start.com/img/coordinates/17/532b7cbe070a3579f424988a040752f2-3113/37b982ceaf27649b98b538d83c61e11a.jpg", style: "シンプル" },
+  { id: "f5",  image: "https://static.staff-start.com/img/coordinates/17/532b7cbe070a3579f424988a040752f2-3113/0a88ff1b93fa8875a240d63c9005856a.jpg", style: "ナチュラル" },
+  { id: "f6",  image: "https://static.staff-start.com/img/coordinates/17/d8030afe156a4de429b42187a7bb28eb-19570/dbe635ccc0374dfd0150798d1c75b58c.jpg", style: "楽チンコーデ" },
+  { id: "f7",  image: "https://static.staff-start.com/img/coordinates/17/b6162fbb8de39d5dcb950ac9d5fe80e8-125508/2742f01dd05d9554c52ac3ab52e44b9c.jpg", style: "チェック柄" },
+  { id: "f8",  image: "https://static.staff-start.com/img/coordinates/17/0d620a440d7259218ff725f59419a5a1-28526/a89ba1e2a9b13ea6796644e625686aed.jpg", style: "大人可愛い" },
+  { id: "f9",  image: "https://static.staff-start.com/img/coordinates/17/d917e680c14c6fcd74d08c935436f1b5-28224/33bb612dd70febe2b06ecbfc033aac90.jpg", style: "フェミニン" },
+  { id: "f10", image: "https://static.staff-start.com/img/coordinates/17/d2e353dae1f2806edac299d7874eceb5-125885/4fe52ce06a1a4c8d18f3fd5c759e0ada.jpg", style: "きれいめ" },
+  { id: "f11", image: "https://static.staff-start.com/img/coordinates/17/251e5f3c1e932d79e573003009045aeb-77776/48c901c0e8066833260e6b56369d099f.jpg", style: "カジュアル" },
+  { id: "f12", image: "https://static.staff-start.com/img/coordinates/17/a2b4d42241e1d46c2fac79ae26f12c62-136847/bd948280bf2593c8b97431e95519b0d7.jpg", style: "Tシャツコーデ" },
+  { id: "f13", image: "https://static.staff-start.com/img/coordinates/17/aabfe8f92a572241f945dc7126faf8fc-109314/fea4876ea1161d08728f98eb47231003.jpg", style: "低身長コーデ" },
+  { id: "f14", image: "https://static.staff-start.com/img/coordinates/17/6fc18add59ae328cbdb7f602b1a535e5-109615/6054f0ac8f68c627ab0c006d6bfc7380.jpg", style: "モノトーン" },
+  { id: "f15", image: "https://static.staff-start.com/img/coordinates/17/7c9c47db388f0f6780f93d7d02a9f9de-92764/26f11301fe1771cbd4bea73591c8ad2f.jpg", style: "トレンドコーデ" },
+  { id: "f16", image: "https://static.staff-start.com/img/coordinates/17/532b7cbe070a3579f424988a040752f2-3113/3e39b7681a2a702dc786c95346309ef6.jpg", style: "ビスチェコーデ" },
+  { id: "f17", image: "https://static.staff-start.com/img/coordinates/17/a95bd4b5e984e570ba0289fa72ca94fc-113117/eee83f08e017f54426f2d5314c5e8235.jpg", style: "高身長コーデ" },
+  { id: "f18", image: "https://static.staff-start.com/img/coordinates/17/532b7cbe070a3579f424988a040752f2-3113/079fbad621129d856b5784c5261aec7a.jpg", style: "大人シンプル" },
+  { id: "f19", image: "https://static.staff-start.com/img/coordinates/17/532b7cbe070a3579f424988a040752f2-3113/8d0c62ebfc4eb92590b7073ac78f4217.jpg", style: "ホワイトコーデ" },
+  { id: "f20", image: "https://static.staff-start.com/img/coordinates/17/872363c8e5a96dd9451cb2693cf83569-136743/ef7a017f864f8063c8b5d50f9b1a5d84.jpg", style: "骨格ウェーブ" },
+  { id: "f21", image: "https://static.staff-start.com/img/coordinates/17/872363c8e5a96dd9451cb2693cf83569-136743/df0a3f8ad55b158d5d77c5250ebc0884.jpg", style: "ゆるコーデ" },
+  { id: "f22", image: "https://static.staff-start.com/img/coordinates/17/0befcb6854bc6a1e3d3ab31b6aaec951-18205/65529ae677e64de7bd29c3177a54144a.jpg", style: "ストリート" },
+  { id: "f23", image: "https://static.staff-start.com/img/coordinates/17/872363c8e5a96dd9451cb2693cf83569-136743/07e2c890ef9d30132e2f0dfd17d1ba4f.jpg", style: "スポーティ" },
+  { id: "f24", image: "https://static.staff-start.com/img/coordinates/17/872363c8e5a96dd9451cb2693cf83569-136743/5d2aba994e565c723d662f10f7f6ae8b.jpg", style: "デニム×低身長" },
 ]
 
 // 男性向けスタイル（写真と名前を一致させた）
