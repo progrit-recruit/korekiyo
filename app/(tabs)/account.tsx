@@ -108,14 +108,15 @@ export default function AccountScreen() {
   }, [])
 
   async function handleRediagnosis() {
-    Alert.alert("再診断", "診断をリセットして最初からやり直しますか？", [
+    Alert.alert("プロフィール再設定", "スタイル診断とプロフィール情報をリセットしてやり直しますか？", [
       { text: "キャンセル", style: "cancel" },
       {
-        text: "リセットして診断",
+        text: "リセットして再設定",
         style: "destructive",
         onPress: async () => {
           await AsyncStorage.removeItem("onboarding_done")
           await AsyncStorage.removeItem("today_mood")
+          await AsyncStorage.removeItem("user_profile")
           router.replace("/onboarding/diagnosis")
         },
       },
@@ -206,11 +207,7 @@ export default function AccountScreen() {
             label="顔タイプ"
             value={profile?.faceType && profile.faceType !== "unknown" ? profile.faceType : profile?.faceType === "unknown" ? "わからない" : "未設定"}
           />
-        </View>
-
-        <Text style={styles.sectionTitle}>診断</Text>
-        <View style={styles.card}>
-          <Row icon="refresh-outline" label="再診断する" onPress={handleRediagnosis} />
+          <Row icon="refresh-outline" label="プロフィールを再設定する" onPress={handleRediagnosis} />
         </View>
 
         <Text style={styles.sectionTitle}>連携</Text>
