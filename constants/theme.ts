@@ -63,27 +63,27 @@ export const MALE_STYLES = [
 export const EC_OUTFITS_FEMALE = [
   {
     id: "ec_f1", source: "PAL CLOSET",
-    label: "ピンクコートで上品に",
-    items: ["ピンクコート", "ブラックニットタートル", "ブラックタイツ＋ブーツ"],
+    label: "レイヤードホワイトコーデ",
+    items: ["シアーレイヤードキャミ", "ホワイトワイドスカート", "サンダル"],
     mood: "フェミニン & こなれ感",
-    temp: "10〜18℃向き",
-    image: "https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?w=700&q=80",
+    temp: "18〜26℃向き",
+    image: "https://images.wear2.jp/coordinate/bBildLXx/CLqAER22/1778393048_276.jpg",
   },
   {
     id: "ec_f2", source: "ZOZOTOWN",
-    label: "ホワイトワントーン",
-    items: ["ホワイトブラウス", "ワイドホワイトパンツ", "サンダル"],
-    mood: "クリーン & トレンド感",
-    temp: "18〜26℃向き",
-    image: "https://images.unsplash.com/photo-1566206091558-7f218b696731?w=700&q=80",
+    label: "キャミ×ティアードスカート",
+    items: ["キャミソール", "ティアードマキシスカート", "サンダル"],
+    mood: "ガーリー & ナチュラル",
+    temp: "20〜28℃向き",
+    image: "https://images.wear2.jp/coordinate/qri8rkoo/ZvvXU4Y6/1777129826_276.jpg",
   },
   {
     id: "ec_f3", source: "GRL",
-    label: "キャメルコートできれいめ",
-    items: ["キャメルコート", "カーキニットワンピ", "ヒールパンプス"],
-    mood: "きれいめ & 大人っぽい",
-    temp: "12〜20℃向き",
-    image: "https://images.unsplash.com/photo-1618244972963-dbee1a7edc95?w=700&q=80",
+    label: "ピンクレース×ワイドデニム",
+    items: ["ピンクレースブラウス", "ブラックワイドデニム", "ホワイトバッグ"],
+    mood: "きれいめ & フェミニン",
+    temp: "18〜25℃向き",
+    image: "https://images.wear2.jp/coordinate/AAix6kB7/E4mzX3XO/1778061782_276.jpg",
   },
 ]
 
@@ -116,25 +116,25 @@ export const EC_OUTFITS_MALE = [
 
 export const MOCK_OUTFITS = [
   {
-    id: "o1", label: "ホワイトワントーン",
-    items: ["ホワイトブラウス", "ワイドホワイトパンツ", "サンダル"],
-    mood: "クリーン & トレンド感",
+    id: "o1", label: "キャミ×ワイドデニム",
+    items: ["ブラックキャミソール", "ワイドデニム", "サンダル"],
+    mood: "カジュアル & トレンド感",
+    temp: "20〜28℃向き",
+    image: "https://images.wear2.jp/coordinate/qri8rkoo/ZWmJ1ii5/1775918117_276.jpg",
+  },
+  {
+    id: "o2", label: "白シャツ×黒ワイドパンツ",
+    items: ["ホワイトオープンカラーシャツ", "ブラックワイドパンツ", "サンダル"],
+    mood: "きれいめ & こなれ感",
     temp: "18〜26℃向き",
-    image: "https://images.unsplash.com/photo-1566206091558-7f218b696731?w=700&q=80",
+    image: "https://images.wear2.jp/coordinate/ekiqgwAP/ouMM4ndO/1778068239_276.jpg",
   },
   {
-    id: "o2", label: "キャメルコートできれいめ",
-    items: ["キャメルコート", "カーキニットワンピ", "ヒールパンプス"],
-    mood: "きれいめ & 大人っぽい",
-    temp: "12〜20℃向き",
-    image: "https://images.unsplash.com/photo-1618244972963-dbee1a7edc95?w=700&q=80",
-  },
-  {
-    id: "o3", label: "ピンクコートで上品に",
-    items: ["ピンクコート", "ブラックニットタートル", "ブーツ"],
-    mood: "フェミニン & こなれ感",
-    temp: "10〜18℃向き",
-    image: "https://images.unsplash.com/photo-1485462537746-965f33f7f6a7?w=700&q=80",
+    id: "o3", label: "グラフィックT×ワイドデニム",
+    items: ["グラフィックTシャツ", "ライトブルーワイドデニム", "スニーカー"],
+    mood: "ストリート & カジュアル",
+    temp: "18〜26℃向き",
+    image: "https://images.wear2.jp/coordinate/EJiPpMv2/JPDTvIE1/1777379018_276.jpg",
   },
 ]
 
