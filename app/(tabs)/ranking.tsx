@@ -3,6 +3,7 @@ import {
   View, Text, StyleSheet, TouchableOpacity, ScrollView,
   SafeAreaView, Image, Dimensions,
 } from "react-native"
+import { Ionicons } from "@expo/vector-icons"
 import { Colors, MOCK_RANKING, MOCK_TIMELINE } from "../../constants/theme"
 
 const { width } = Dimensions.get("window")
@@ -67,7 +68,10 @@ export default function RankingScreen() {
                 </View>
                 <Text style={styles.podiumName} numberOfLines={2}>{MOCK_RANKING[1].name}</Text>
                 <Text style={styles.podiumBrand}>{MOCK_RANKING[1].brand}</Text>
-                <Text style={styles.podiumLikes}>❤️ {MOCK_RANKING[1].likes.toLocaleString()}</Text>
+                <View style={styles.podiumLikesRow}>
+                  <Ionicons name={"heart" as any} size={11} color={Colors.primary} />
+                  <Text style={styles.podiumLikes}>{MOCK_RANKING[1].likes.toLocaleString()}</Text>
+                </View>
               </View>
               {/* 1位 */}
               <View style={[styles.podiumItem, { marginBottom: 20 }]}>
@@ -78,7 +82,10 @@ export default function RankingScreen() {
                 </View>
                 <Text style={styles.podiumName} numberOfLines={2}>{MOCK_RANKING[0].name}</Text>
                 <Text style={styles.podiumBrand}>{MOCK_RANKING[0].brand}</Text>
-                <Text style={styles.podiumLikes}>❤️ {MOCK_RANKING[0].likes.toLocaleString()}</Text>
+                <View style={styles.podiumLikesRow}>
+                  <Ionicons name={"heart" as any} size={11} color={Colors.primary} />
+                  <Text style={styles.podiumLikes}>{MOCK_RANKING[0].likes.toLocaleString()}</Text>
+                </View>
               </View>
               {/* 3位 */}
               <View style={styles.podiumItem}>
@@ -88,7 +95,10 @@ export default function RankingScreen() {
                 </View>
                 <Text style={styles.podiumName} numberOfLines={2}>{MOCK_RANKING[2].name}</Text>
                 <Text style={styles.podiumBrand}>{MOCK_RANKING[2].brand}</Text>
-                <Text style={styles.podiumLikes}>❤️ {MOCK_RANKING[2].likes.toLocaleString()}</Text>
+                <View style={styles.podiumLikesRow}>
+                  <Ionicons name={"heart" as any} size={11} color={Colors.primary} />
+                  <Text style={styles.podiumLikes}>{MOCK_RANKING[2].likes.toLocaleString()}</Text>
+                </View>
               </View>
             </View>
 
@@ -101,7 +111,10 @@ export default function RankingScreen() {
                   <View style={{ flex: 1 }}>
                     <Text style={styles.listName}>{item.name}</Text>
                     <Text style={styles.listBrand}>{item.brand}</Text>
-                    <Text style={styles.listLikes}>❤️ {item.likes.toLocaleString()}</Text>
+                    <View style={styles.listLikesRow}>
+                      <Ionicons name={"heart" as any} size={11} color={Colors.primary} />
+                      <Text style={styles.listLikes}>{item.likes.toLocaleString()}</Text>
+                    </View>
                   </View>
                   <TouchableOpacity style={styles.ecBtn}>
                     <Text style={styles.ecBtnText}>ECへ →</Text>
@@ -138,7 +151,7 @@ export default function RankingScreen() {
                     <Text style={styles.timelineCaption}>{post.caption}</Text>
                     <View style={styles.timelineActions}>
                       <TouchableOpacity style={styles.likeAction} onPress={() => toggleTimelineLike(post.id)}>
-                        <Text style={{ fontSize: 18 }}>{isLiked ? "❤️" : "🤍"}</Text>
+                        <Ionicons name={(isLiked ? "heart" : "heart-outline") as any} size={18} color={isLiked ? Colors.primary : Colors.textMuted} />
                         <Text style={styles.likeCount}>{isLiked ? post.likes + 1 : post.likes}</Text>
                       </TouchableOpacity>
                       {post.role === "shop" && (
@@ -180,6 +193,7 @@ const styles = StyleSheet.create({
   podiumBadgeText: { fontSize: 11, fontWeight: "800", color: "#fff" },
   podiumName: { fontSize: 11, fontWeight: "700", color: Colors.text, textAlign: "center", lineHeight: 14 },
   podiumBrand: { fontSize: 10, color: Colors.primary },
+  podiumLikesRow: { flexDirection: "row", alignItems: "center", gap: 3 },
   podiumLikes: { fontSize: 11, color: Colors.textMuted },
   listSection: { paddingHorizontal: 20 },
   listItem: { flexDirection: "row", alignItems: "center", gap: 12, backgroundColor: Colors.surface, borderRadius: 16, padding: 12, marginBottom: 8 },
@@ -187,6 +201,7 @@ const styles = StyleSheet.create({
   listImage: { width: 56, height: 56, borderRadius: 12 },
   listName: { fontSize: 13, fontWeight: "700", color: Colors.text },
   listBrand: { fontSize: 11, color: Colors.primary },
+  listLikesRow: { flexDirection: "row", alignItems: "center", gap: 3 },
   listLikes: { fontSize: 11, color: Colors.textMuted },
   ecBtn: { paddingHorizontal: 12, paddingVertical: 6, borderRadius: 12, borderWidth: 1, borderColor: Colors.primary },
   ecBtnText: { fontSize: 11, color: Colors.primary, fontWeight: "700" },

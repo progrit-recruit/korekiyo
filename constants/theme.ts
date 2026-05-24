@@ -1,7 +1,7 @@
 export const Colors = {
-  primary: "#FF6B6B",
-  primaryLight: "#FFE8E8",
-  primaryDark: "#E55A5A",
+  primary: "#FF7A00",
+  primaryLight: "#FFF3E0",
+  primaryDark: "#E56900",
   accent: "#FFD93D",
   accentLight: "#FFF8DC",
   surface: "#FFFFFF",
@@ -144,6 +144,14 @@ export const MOCK_RECOMMENDATIONS = [
   { id: "r3", name: "Tucker Button Down", brand: "Golf Wang", price: 14800, image: "https://golfwang.com/cdn/shop/files/Golfwang69ea8374486d9669ea837448b1b.1252492569ea837448b1b.jpg?v=1776976822&width=400" },
   { id: "r4", name: "Dante Hoodie", brand: "Golf Wang", price: 16200, image: "https://golfwang.com/cdn/shop/files/Golfwang69ea6f9fa2e1741453132869ea6f9fa2e1e.69ea6f9fa2e1e.jpg?v=1776971892&width=400" },
   { id: "r5", name: "Norkin Quarter Zip", brand: "Golf Wang", price: 14800, image: "https://golfwang.com/cdn/shop/files/Golfwang694318a0275802694318a02776d.56078988694318a02776d.jpg?v=1770841297&width=400" },
+  { id: "r6", name: "ニーロク2セットカーディガン", brand: "niko and ...", price: 8000, image: "https://pdimg.dot-st.com/images/nikoand/goods/itemImg67/679266/item_679266_main_87_1778818217.jpg" },
+  { id: "r7", name: "ギャザーパンツ", brand: "studio CLIP", price: 5790, image: "https://pdimg.dot-st.com/images/studioclip/goods/itemImg64/647056/item_647056_main_02_1778198250.jpg" },
+  { id: "r8", name: "リッチクリーンプリントT", brand: "GLOBAL WORK", price: 3490, image: "https://pdimg.dot-st.com/images/globalwork/goods/itemImg63/636780/item_636780_main_05_1774951929.jpg" },
+  { id: "r9", name: "DRYクシュイージーパンツ", brand: "niko and ...", price: 5000, image: "https://pdimg.dot-st.com/images/nikoand/goods/itemImg64/647787/item_647787_main_17_1773713392.jpg" },
+  { id: "r10", name: "てぃらヘンリーボーダーTEE", brand: "niko and ...", price: 4500, image: "https://pdimg.dot-st.com/images/nikoand/goods/itemImg66/667114/item_667114_main_60_1776311192.jpg" },
+  { id: "r11", name: "シアーレースレイヤードT", brand: "LEPSIM", price: 4990, image: "https://pdimg.dot-st.com/images/lepsim/goods/itemImg88/887658/item_887658_main_09_1778830400.jpg" },
+  { id: "r12", name: "Dante Quilted Bomber", brand: "Golf Wang", price: 18400, image: "https://golfwang.com/cdn/shop/files/Golfwang69ea84393d9ed469ea84393dacb.3683027669ea84393dacb.jpg?v=1776977051&width=400" },
+  { id: "r13", name: "Freshman Sweatpant", brand: "Golf Wang", price: 14800, image: "https://golfwang.com/cdn/shop/files/Golfwang69ea83b861ef9469ea83b861ffe.1264078069ea83b861ffe.jpg?v=1776976927&width=400" },
 ]
 
 export const MOCK_RANKING = [
@@ -152,11 +160,22 @@ export const MOCK_RANKING = [
   { rank: 3, name: "Crush Denim Jacket", brand: "Golf Wang", likes: 1654, image: "https://golfwang.com/cdn/shop/files/Golfwang698b93b5883909698b93b58860d.80882214698b93b58860d_5f5f025e-5530-439b-af7b-bb0840b868c4.jpg?v=1774986972&width=400" },
   { rank: 4, name: "Dante Quilted Bomber", brand: "Golf Wang", likes: 1423, image: "https://golfwang.com/cdn/shop/files/Golfwang69ea84393d9ed469ea84393dacb.3683027669ea84393dacb.jpg?v=1776977051&width=400" },
   { rank: 5, name: "Freshman Sweatpant", brand: "Golf Wang", likes: 1201, image: "https://golfwang.com/cdn/shop/files/Golfwang69ea83b861ef9469ea83b861ffe.1264078069ea83b861ffe.jpg?v=1776976927&width=400" },
+  { rank: 6, name: "ニーロク2セットカーディガン", brand: "niko and ...", likes: 1102, image: "https://pdimg.dot-st.com/images/nikoand/goods/itemImg67/679266/item_679266_main_87_1778818217.jpg" },
+  { rank: 7, name: "ギャザーパンツ", brand: "studio CLIP", likes: 987, image: "https://pdimg.dot-st.com/images/studioclip/goods/itemImg64/647056/item_647056_main_02_1778198250.jpg" },
+  { rank: 8, name: "リッチクリーンプリントT", brand: "GLOBAL WORK", likes: 834, image: "https://pdimg.dot-st.com/images/globalwork/goods/itemImg63/636780/item_636780_main_05_1774951929.jpg" },
 ]
 
 export const MOCK_TIMELINE = [
-  { id: "t1", user: "MKstyle", role: "shop", shop: "Ungrid", likes: 234, image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&q=80", caption: "今日の春コーデ 定番のシアー素材をあわせました" },
-  { id: "t2", user: "hana__code", role: "user", likes: 89, image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80", caption: "授業帰りのシンプルコーデ。動きやすさ重視です" },
-  { id: "t3", user: "yuki.fashion", role: "shop", shop: "Snidel", likes: 412, image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=600&q=80", caption: "新作ワンピース入荷しました！今週末まで10%OFF" },
-  { id: "t4", user: "tomoka__", role: "user", likes: 67, image: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=600&q=80", caption: "モノトーンでまとめた大人っぽい仕上がりに" },
+  { id: "t1", user: "PAL CLOSET", role: "shop", shop: "PAL CLOSET", likes: 412,
+    image: "https://contents.palcloset.jp/static/images/contents/all_260522_001.jpg",
+    caption: "40代・50代オトナの夏先取りワードローブ" },
+  { id: "t2", user: "yuki.fashion", role: "user", likes: 234,
+    image: "https://contents.palcloset.jp/static/images/contents/all_260521_001.jpg",
+    caption: "夏を先取り！EARLY SUMMER SALEコーデ" },
+  { id: "t3", user: "PAL CLOSET", role: "shop", shop: "PAL CLOSET", likes: 389,
+    image: "https://contents.palcloset.jp/static/images/contents/all_260520_001.jpg",
+    caption: "この夏、似合わせワンピースでスタイルアップ" },
+  { id: "t4", user: "hana__code", role: "user", likes: 89,
+    image: "https://contents.palcloset.jp/static/images/contents/all_260515_001.jpg",
+    caption: "体型カバーもスタイルアップも叶う着やせパンツ" },
 ]

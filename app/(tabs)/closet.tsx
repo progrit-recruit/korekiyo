@@ -11,7 +11,7 @@ import { Colors } from "../../constants/theme"
 const { width } = Dimensions.get("window")
 const ITEM_W = (width - 52) / 2
 const STORAGE_KEY = "user_closet"
-const CLOSET_VERSION = "v3"
+const CLOSET_VERSION = "v4"
 const VERSION_KEY = "user_closet_version"
 
 type ClothingItem = {
@@ -30,6 +30,9 @@ const MOCK_CLOTHES: ClothingItem[] = [
   { id: "c4", image: "https://golfwang.com/cdn/shop/files/Golfwang69ea70dbc74da469ea70dbc764c.8747596369ea70dbc764c.jpg?v=1776972068&width=400", name: "Garden Hoodie", category: "トップス", color: "クリーム", brand: "Golf Wang" },
   { id: "c5", image: "https://golfwang.com/cdn/shop/files/Golfwang69ea83e87f42e869ea83e87f513.3098784169ea83e87f513.jpg?v=1776976973&width=400", name: "G-7 Cargo Pant Sand", category: "ボトムス", color: "サンド", brand: "Golf Wang" },
   { id: "c6", image: "https://golfwang.com/cdn/shop/files/Golfwang69ea6f9fa2e1741453132869ea6f9fa2e1e.69ea6f9fa2e1e.jpg?v=1776971892&width=400", name: "Dante Hoodie", category: "トップス", color: "ブラック", brand: "Golf Wang" },
+  { id: "c7", image: "https://pdimg.dot-st.com/images/nikoand/goods/itemImg67/679266/item_679266_main_87_1778818217.jpg", name: "ニーロク2セットカーディガン", category: "トップス", color: "ベージュ", brand: "niko and ..." },
+  { id: "c8", image: "https://pdimg.dot-st.com/images/studioclip/goods/itemImg64/647056/item_647056_main_02_1778198250.jpg", name: "ギャザーパンツ", category: "ボトムス", color: "ベージュ", brand: "studio CLIP" },
+  { id: "c9", image: "https://pdimg.dot-st.com/images/globalwork/goods/itemImg63/636780/item_636780_main_05_1774951929.jpg", name: "リッチクリーンプリントT", category: "トップス", color: "ホワイト", brand: "GLOBAL WORK" },
 ]
 
 const CATEGORIES = ["すべて", "トップス", "ボトムス", "アウター", "シューズ", "バッグ", "アクセ"]
