@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import {
   View, Text, StyleSheet, ScrollView, TouchableOpacity,
-  Image, SafeAreaView, Dimensions, Modal, ActivityIndicator,
+  Image, SafeAreaView, Dimensions, Modal,
 } from "react-native"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { Ionicons } from "@expo/vector-icons"
@@ -11,7 +11,7 @@ import {
 } from "../../constants/theme"
 
 const { width } = Dimensions.get("window")
-const OUTFIT_W = width - 40   // カード幅 = 画面幅 - 余白（自然なサイズ）
+const CARD3_W = (width - 40 - 16) / 3
 
 type Outfit = {
   id: string; label: string; items: string[]
@@ -39,14 +39,13 @@ function MoodModal({ visible, onSelect }: { visible: boolean; onSelect: (l: numb
   )
 }
 
+const NUM_COLORS = [Colors.primary, "#B8860B", "#7B7B8B"]
+
 export default function HomeScreen() {
   const [mood, setMood] = useState<number | null>(null)
   const [showMood, setShowMood] = useState(false)
   const [liked, setLiked] = useState<string[]>([])
   const [outfits, setOutfits] = useState<Outfit[]>([])
-  const [gender, setGender] = useState<"female" | "male">("female")
-  const [aiLoading, setAiLoading] = useState(false)
-  const [aiGenerated, setAiGenerated] = useState(false)
 
   useEffect(() => {
     ;(async () => {
@@ -58,22 +57,17 @@ export default function HomeScreen() {
       if (savedLiked) setLiked(JSON.parse(savedLiked))
 
       const g = (await AsyncStorage.getItem("user_gender") ?? "female") as "female" | "male"
-      setGender(g)
-
-      // クローゼット内アイテム数に応じてコーデ切り替え
       const closet = await AsyncStorage.getItem("user_closet")
       const closetItems = closet ? JSON.parse(closet) : []
       const ecOutfits = g === "male" ? EC_OUTFITS_MALE : EC_OUTFITS_FEMALE
 
       if (closetItems.length < 3) {
-        // アイテムが少ない → ECサイト/雑誌コーデ
         setOutfits(ecOutfits)
       } else {
-        // アイテムが増えてきた → 自分の服を含むコーデ + ECコーデ混合
         setOutfits([
           { ...MOCK_OUTFITS[0], fromCloset: true, label: "あなたの服で今日イチ" },
           ecOutfits[0],
-          { ...MOCK_OUTFITS[1], fromCloset: true, label: "あなたの服でスッキリ見え" },
+          { ...MOCK_OUTFITS[1], fromCloset: true, label: "あなたの服でスッキリ" },
         ])
       }
     })()
@@ -89,15 +83,6 @@ export default function HomeScreen() {
     const next = liked.includes(id) ? liked.filter(x => x !== id) : [...liked, id]
     setLiked(next)
     await AsyncStorage.setItem("liked_outfits", JSON.stringify(next))
-  }
-
-  function handleAiGenerate() {
-    setAiLoading(true)
-    setAiGenerated(false)
-    setTimeout(() => {
-      setAiLoading(false)
-      setAiGenerated(true)
-    }, 2500)
   }
 
   const currentMood = MOODS.find(m => m.level === mood)
@@ -150,109 +135,54 @@ export default function HomeScreen() {
           </TouchableOpacity>
         </View>
 
-        {/* AIコーデ生成ゾーン */}
+        {/* 今日のAIコーデ（3枚横並び・自動生成） */}
         <View style={s.sectionRow}>
-          <Text style={s.secTitle}>クローゼットからAIコーデ</Text>
-        </View>
-        <View style={s.aiCard}>
-          {!aiGenerated ? (
-            <>
-              <Ionicons name="sparkles-outline" size={28} color={Colors.primary} style={{ marginBottom: 8 }} />
-              <Text style={s.aiCardTitle}>今日の組み合わせをAIが生成</Text>
-              <Text style={s.aiCardSub}>クローゼットに登録した服から{"\n"}ベストなコーデを提案します</Text>
-              <TouchableOpacity style={s.aiBtn} onPress={handleAiGenerate} disabled={aiLoading}>
-                {aiLoading
-                  ? <ActivityIndicator color="#fff" size="small" />
-                  : <Text style={s.aiBtnText}>AIコーデを生成する</Text>
-                }
-              </TouchableOpacity>
-            </>
-          ) : (
-            <>
-              <Image
-                source={{ uri: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700&q=80" }}
-                style={s.aiImage}
-                resizeMode="cover"
-              />
-              <View style={s.aiResult}>
-                <View style={s.aiResultBadge}>
-                  <Ionicons name="sparkles" size={12} color="#fff" />
-                  <Text style={s.aiResultBadgeText}>AI生成コーデ</Text>
-                </View>
-                <Text style={s.aiResultItems}>白Tシャツ + デニム + スニーカー</Text>
-                <TouchableOpacity onPress={() => setAiGenerated(false)} style={s.aiRetry}>
-                  <Ionicons name="refresh-outline" size={14} color={Colors.primary} />
-                  <Text style={s.aiRetryText}>別のコーデを生成</Text>
-                </TouchableOpacity>
-              </View>
-            </>
-          )}
-        </View>
-
-        {/* 3コーデ */}
-        <View style={s.sectionRow}>
-          <Text style={s.secTitle}>今日の3コーデ</Text>
+          <View style={s.aiBadge}>
+            <Ionicons name="sparkles" size={11} color="#fff" />
+            <Text style={s.aiBadgeText}>AI</Text>
+          </View>
+          <Text style={s.secTitle}>今日のコーデ提案</Text>
           <Text style={s.secSub}>
-            {outfits[0]?.source ? "ファッション誌・ECより" : "あなたの服から提案"}
+            {outfits[0]?.source ? "ECより" : "あなたの服から"}
           </Text>
         </View>
 
-        <View style={s.outfitList}>
-          {outfits.map(outfit => {
+        <View style={s.outfit3Row}>
+          {outfits.map((outfit, idx) => {
             const isLiked = liked.includes(outfit.id)
             return (
-              <View key={outfit.id} style={s.outfitCard}>
+              <View key={outfit.id} style={s.outfit3Card}>
                 <Image
                   source={{ uri: outfit.image }}
-                  style={s.outfitImg}
+                  style={s.outfit3Img}
                   resizeMode="cover"
                 />
-                {/* ソースバッジ */}
-                {outfit.source && (
-                  <View style={s.sourceBadge}>
-                    <Ionicons name="globe-outline" size={10} color="#fff" />
-                    <Text style={s.sourceBadgeText}>{outfit.source}</Text>
-                  </View>
-                )}
-                {outfit.fromCloset && (
-                  <View style={[s.sourceBadge, { backgroundColor: Colors.primary }]}>
-                    <Ionicons name="shirt-outline" size={10} color="#fff" />
-                    <Text style={s.sourceBadgeText}>あなたの服</Text>
-                  </View>
-                )}
-                {/* いいねボタン */}
-                <TouchableOpacity style={s.likeBtn} onPress={() => toggleLike(outfit.id)}>
+                <TouchableOpacity
+                  style={s.outfit3Like}
+                  onPress={() => toggleLike(outfit.id)}
+                >
                   <Ionicons
                     name={isLiked ? "heart" : "heart-outline"}
-                    size={22}
+                    size={14}
                     color={isLiked ? Colors.primary : "#fff"}
                   />
                 </TouchableOpacity>
-                {/* 情報 */}
-                <View style={s.outfitInfo}>
-                  <View style={s.outfitLabelRow}>
-                    <View style={s.outfitLabel}>
-                      <Text style={s.outfitLabelText}>{outfit.label}</Text>
-                    </View>
-                    <Text style={s.outfitTemp}>
-                      <Ionicons name="thermometer-outline" size={11} color={Colors.textMuted} /> {outfit.temp}
-                    </Text>
-                  </View>
-                  <Text style={s.outfitMood}>{outfit.mood}</Text>
-                  <View style={s.itemTags}>
-                    {outfit.items.map(item => (
-                      <View key={item} style={s.itemTag}>
-                        <Text style={s.itemTagText}>{item}</Text>
-                      </View>
-                    ))}
-                  </View>
+                <View style={[s.outfit3Num, { backgroundColor: NUM_COLORS[idx] }]}>
+                  <Text style={s.outfit3NumText}>{idx + 1}</Text>
+                </View>
+                <View style={s.outfit3Info}>
+                  <Text style={s.outfit3Label} numberOfLines={2}>{outfit.label}</Text>
+                  <Text style={s.outfit3Mood} numberOfLines={1}>{outfit.mood}</Text>
+                  {outfit.source && (
+                    <Text style={s.outfit3Source} numberOfLines={1}>{outfit.source}</Text>
+                  )}
                 </View>
               </View>
             )
           })}
         </View>
 
-        {/* おすすめ商品 */}
+        {/* あなたへのおすすめ */}
         <View style={s.sectionRow}>
           <Text style={s.secTitle}>あなたへのおすすめ</Text>
           <Text style={s.secSub}>ECサイトでチェック</Text>
@@ -291,43 +221,42 @@ const s = StyleSheet.create({
   date: { fontSize: 12, color: Colors.textMuted, marginTop: 1 },
   ptBadge: { flexDirection: "row", alignItems: "center", gap: 4, backgroundColor: Colors.accentLight, paddingHorizontal: 12, paddingVertical: 7, borderRadius: 20, borderWidth: 1, borderColor: Colors.accent },
   ptText: { fontSize: 13, fontWeight: "800", color: Colors.point },
-  infoBar: { flexDirection: "row", marginHorizontal: 20, marginBottom: 16, backgroundColor: Colors.surface, borderRadius: 16, borderWidth: 1, borderColor: Colors.border, padding: 12 },
+  infoBar: { flexDirection: "row", marginHorizontal: 20, marginBottom: 20, backgroundColor: Colors.surface, borderRadius: 16, borderWidth: 1, borderColor: Colors.border, padding: 12 },
   infoItem: { flex: 1, flexDirection: "row", alignItems: "center", gap: 8 },
   divider: { width: 1, backgroundColor: Colors.border, marginHorizontal: 4 },
   infoLabel: { fontSize: 10, color: Colors.textMuted },
   infoVal: { fontSize: 11, fontWeight: "700", color: Colors.text },
-  sectionRow: { paddingHorizontal: 20, marginBottom: 10, flexDirection: "row", alignItems: "baseline", gap: 8 },
+  sectionRow: { paddingHorizontal: 20, marginBottom: 12, flexDirection: "row", alignItems: "center", gap: 8 },
   secTitle: { fontSize: 16, fontWeight: "800", color: Colors.text },
-  secSub: { fontSize: 11, color: Colors.textMuted },
-  // AI card
-  aiCard: { marginHorizontal: 20, marginBottom: 24, backgroundColor: Colors.surface, borderRadius: 20, borderWidth: 1, borderColor: Colors.border, overflow: "hidden", alignItems: "center", padding: 24 },
-  aiCardTitle: { fontSize: 15, fontWeight: "800", color: Colors.text, marginBottom: 6 },
-  aiCardSub: { fontSize: 12, color: Colors.textMuted, textAlign: "center", lineHeight: 18, marginBottom: 16 },
-  aiBtn: { backgroundColor: Colors.primary, paddingHorizontal: 28, paddingVertical: 12, borderRadius: 24, minWidth: 160, alignItems: "center" },
-  aiBtnText: { color: "#fff", fontWeight: "700", fontSize: 14 },
-  aiImage: { width: "100%", height: 220, borderRadius: 12, marginBottom: 12 },
-  aiResult: { width: "100%", gap: 6 },
-  aiResultBadge: { flexDirection: "row", alignItems: "center", gap: 4, backgroundColor: Colors.primary, paddingHorizontal: 10, paddingVertical: 4, borderRadius: 12, alignSelf: "flex-start" },
-  aiResultBadgeText: { fontSize: 11, color: "#fff", fontWeight: "700" },
-  aiResultItems: { fontSize: 13, color: Colors.text, fontWeight: "600" },
-  aiRetry: { flexDirection: "row", alignItems: "center", gap: 4, marginTop: 4 },
-  aiRetryText: { fontSize: 12, color: Colors.primary, fontWeight: "600" },
-  // Outfits
-  outfitList: { paddingHorizontal: 20, gap: 16, marginBottom: 24 },
-  outfitCard: { width: OUTFIT_W, backgroundColor: Colors.surface, borderRadius: 20, overflow: "hidden", borderWidth: 1, borderColor: Colors.border },
-  outfitImg: { width: "100%", height: OUTFIT_W * 1.1 },
-  sourceBadge: { position: "absolute", top: 12, left: 12, flexDirection: "row", alignItems: "center", gap: 4, backgroundColor: "rgba(0,0,0,0.55)", paddingHorizontal: 8, paddingVertical: 4, borderRadius: 12 },
-  sourceBadgeText: { fontSize: 10, color: "#fff", fontWeight: "700" },
-  likeBtn: { position: "absolute", top: 10, right: 12, backgroundColor: "rgba(0,0,0,0.35)", borderRadius: 20, padding: 7 },
-  outfitInfo: { padding: 14, gap: 6 },
-  outfitLabelRow: { flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
-  outfitLabel: { backgroundColor: Colors.primaryLight, paddingHorizontal: 10, paddingVertical: 3, borderRadius: 10 },
-  outfitLabelText: { fontSize: 11, color: Colors.primary, fontWeight: "700" },
-  outfitTemp: { fontSize: 11, color: Colors.textMuted },
-  outfitMood: { fontSize: 12, color: Colors.textMuted },
-  itemTags: { flexDirection: "row", flexWrap: "wrap", gap: 6 },
-  itemTag: { backgroundColor: Colors.background, paddingHorizontal: 8, paddingVertical: 3, borderRadius: 8, borderWidth: 1, borderColor: Colors.border },
-  itemTagText: { fontSize: 11, color: Colors.text },
+  secSub: { fontSize: 11, color: Colors.textMuted, marginLeft: "auto" },
+  aiBadge: { flexDirection: "row", alignItems: "center", gap: 3, backgroundColor: Colors.primary, paddingHorizontal: 8, paddingVertical: 3, borderRadius: 10 },
+  aiBadgeText: { fontSize: 10, color: "#fff", fontWeight: "800" },
+  // 3コーデ横並び
+  outfit3Row: { flexDirection: "row", paddingHorizontal: 20, gap: 8, marginBottom: 28 },
+  outfit3Card: {
+    flex: 1,
+    backgroundColor: Colors.surface,
+    borderRadius: 16,
+    overflow: "hidden",
+    borderWidth: 1,
+    borderColor: Colors.border,
+    shadowColor: "#000", shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.06, shadowRadius: 3,
+  },
+  outfit3Img: { width: "100%", height: CARD3_W * 1.5 },
+  outfit3Like: {
+    position: "absolute", top: 6, right: 6,
+    backgroundColor: "rgba(0,0,0,0.32)", borderRadius: 14, padding: 5,
+  },
+  outfit3Num: {
+    position: "absolute", top: 6, left: 6,
+    width: 20, height: 20, borderRadius: 10,
+    justifyContent: "center", alignItems: "center",
+  },
+  outfit3NumText: { fontSize: 11, fontWeight: "900", color: "#fff" },
+  outfit3Info: { padding: 8, gap: 2 },
+  outfit3Label: { fontSize: 10, fontWeight: "700", color: Colors.text, lineHeight: 14 },
+  outfit3Mood: { fontSize: 9, color: Colors.textMuted },
+  outfit3Source: { fontSize: 9, color: Colors.primary, fontWeight: "600", marginTop: 2 },
   // Recs
   recScroll: { paddingHorizontal: 20, gap: 12, paddingBottom: 4 },
   recCard: { width: 140, backgroundColor: Colors.surface, borderRadius: 16, overflow: "hidden", borderWidth: 1, borderColor: Colors.border },

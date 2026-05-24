@@ -29,11 +29,11 @@ export const FACE_TYPES = ["フレッシュ", "キュート", "フェミニン",
 
 // 女性向けスタイル（写真と名前を一致させた）
 export const FEMALE_STYLES = [
-  { id: "f1",  image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=80", style: "カジュアル" },
+  { id: "f1",  image: "https://images.unsplash.com/photo-1554568218-0f1715e72254?w=500&q=80", style: "カジュアル" },
   { id: "f2",  image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500&q=80", style: "フェミニン" },
-  { id: "f3",  image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&q=80", style: "ストリート" },
-  { id: "f4",  image: "https://images.unsplash.com/photo-1594938298603-c8148c4b5fa8?w=500&q=80", style: "オフィス" },
-  { id: "f5",  image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&q=80", style: "ガーリー" },
+  { id: "f3",  image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=500&q=80", style: "ストリート" },
+  { id: "f4",  image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80", style: "オフィス" },
+  { id: "f5",  image: "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=500&q=80", style: "ガーリー" },
   { id: "f6",  image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=500&q=80", style: "シンプル" },
   { id: "f7",  image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=500&q=80", style: "モード" },
   { id: "f8",  image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=500&q=80", style: "スポーティ" },
@@ -75,7 +75,7 @@ export const EC_OUTFITS_FEMALE = [
     items: ["オーバーサイズTシャツ", "バギーデニム", "スニーカー"],
     mood: "リラックス & トレンド",
     temp: "15〜23℃向き",
-    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700&q=80",
+    image: "https://images.unsplash.com/photo-1554568218-0f1715e72254?w=700&q=80",
   },
   {
     id: "ec_f3", source: "GRL",
@@ -83,7 +83,7 @@ export const EC_OUTFITS_FEMALE = [
     items: ["リブニットトップス", "テーパードパンツ", "ポインテッドトゥパンプス"],
     mood: "きれいめ & 好感度高め",
     temp: "20〜27℃向き",
-    image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=700&q=80",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=80",
   },
 ]
 
@@ -120,21 +120,21 @@ export const MOCK_OUTFITS = [
     items: ["白Tシャツ", "デニムジーンズ", "白スニーカー"],
     mood: "カジュアル & 動きやすい",
     temp: "20〜25℃向き",
-    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700&q=80",
+    image: "https://images.unsplash.com/photo-1554568218-0f1715e72254?w=700&q=80",
   },
   {
     id: "o2", label: "スッキリ見え",
     items: ["ブラウスシャツ", "テーパードパンツ", "ローファー"],
     mood: "きれいめ & 上品",
     temp: "15〜22℃向き",
-    image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=700&q=80",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=80",
   },
   {
     id: "o3", label: "トレンド感◎",
     items: ["オーバーサイズスウェット", "カーゴパンツ", "チャンキースニーカー"],
     mood: "今っぽ & ゆるふわ",
     temp: "10〜18℃向き",
-    image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=700&q=80",
+    image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=700&q=80",
   },
 ]
 
