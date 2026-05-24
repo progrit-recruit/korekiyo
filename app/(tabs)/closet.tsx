@@ -23,11 +23,11 @@ type ClothingItem = {
 
 const MOCK_CLOTHES: ClothingItem[] = [
   { id: "c1", image: "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=300&q=80", name: "ベージュトレンチコート", category: "アウター", color: "ベージュ", brand: "kastane" },
-  { id: "c2", image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=300&q=80", name: "オフホワイトフレアスカート", category: "ボトムス", color: "オフホワイト", brand: "PAL CLOSET" },
-  { id: "c3", image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=300&q=80", name: "ラベンダーリブニット", category: "トップス", color: "ラベンダー", brand: "LOWRYS FARM" },
+  { id: "c2", image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=300&q=80", name: "ブラックフレアスカート", category: "ボトムス", color: "ブラック", brand: "PAL CLOSET" },
+  { id: "c3", image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=300&q=80", name: "ホワイトリブニット", category: "トップス", color: "ホワイト", brand: "LOWRYS FARM" },
   { id: "c4", image: "https://images.unsplash.com/photo-1550639525-c97d455acf70?w=300&q=80", name: "ブラックプリーツスカート", category: "ボトムス", color: "ブラック", brand: "kastane" },
-  { id: "c5", image: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=300&q=80", name: "シアーフリルブラウス", category: "トップス", color: "オフホワイト", brand: "LOWRYS FARM" },
-  { id: "c6", image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=300&q=80", name: "グレーニットカーデ", category: "トップス", color: "グレー", brand: "PAL CLOSET" },
+  { id: "c5", image: "https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=300&q=80", name: "ホワイトフラワーブラウス", category: "トップス", color: "ホワイト", brand: "LOWRYS FARM" },
+  { id: "c6", image: "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?w=300&q=80", name: "グレーニットカーデ", category: "トップス", color: "グレー", brand: "PAL CLOSET" },
 ]
 
 const CATEGORIES = ["すべて", "トップス", "ボトムス", "アウター", "シューズ", "バッグ", "アクセ"]

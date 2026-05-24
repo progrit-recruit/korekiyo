@@ -31,7 +31,7 @@ export const FACE_TYPES = ["フレッシュ", "キュート", "フェミニン",
 export const FEMALE_STYLES = [
   { id: "f1",  image: "https://images.unsplash.com/photo-1554568218-0f1715e72254?w=500&q=80", style: "カジュアル" },
   { id: "f2",  image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500&q=80", style: "フェミニン" },
-  { id: "f3",  image: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=500&q=80", style: "ストリート" },
+  { id: "f3",  image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&q=80", style: "ストリート" },
   { id: "f4",  image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80", style: "オフィス" },
   { id: "f5",  image: "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=500&q=80", style: "ガーリー" },
   { id: "f6",  image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=500&q=80", style: "シンプル" },
