@@ -32,13 +32,27 @@ export default function RankingScreen() {
           style={[styles.tabBtn, tab === "ranking" && styles.tabBtnActive]}
           onPress={() => setTab("ranking")}
         >
-          <Text style={[styles.tabBtnText, tab === "ranking" && styles.tabBtnTextActive]}>📈 トレンド</Text>
+          <View style={styles.tabBtnInner}>
+            <Ionicons
+              name="trending-up"
+              size={13}
+              color={tab === "ranking" ? Colors.text : Colors.textMuted}
+            />
+            <Text style={[styles.tabBtnText, tab === "ranking" && styles.tabBtnTextActive]}>トレンド</Text>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.tabBtn, tab === "timeline" && styles.tabBtnActive]}
           onPress={() => setTab("timeline")}
         >
-          <Text style={[styles.tabBtnText, tab === "timeline" && styles.tabBtnTextActive]}>📸 タイムライン</Text>
+          <View style={styles.tabBtnInner}>
+            <Ionicons
+              name="heart"
+              size={13}
+              color={tab === "timeline" ? Colors.text : Colors.textMuted}
+            />
+            <Text style={[styles.tabBtnText, tab === "timeline" && styles.tabBtnTextActive]}>人気コーデ</Text>
+          </View>
         </TouchableOpacity>
       </View>
 
@@ -75,7 +89,7 @@ export default function RankingScreen() {
               </View>
               {/* 1位 */}
               <View style={[styles.podiumItem, { marginBottom: 20 }]}>
-                <Text style={{ fontSize: 28, marginBottom: 4 }}>👑</Text>
+                <Ionicons name="trophy" size={28} color="#FFD700" style={{ marginBottom: 4 }} />
                 <Image source={{ uri: MOCK_RANKING[0].image }} style={[styles.podiumImage, { width: 110, height: 140, borderColor: "#FFD700", borderWidth: 3 }]} />
                 <View style={[styles.podiumBadge, { backgroundColor: "#FFD700" }]}>
                   <Text style={styles.podiumBadgeText}>1位</Text>
@@ -102,7 +116,7 @@ export default function RankingScreen() {
               </View>
             </View>
 
-            {/* 4〜5位 */}
+            {/* 4〜8位 */}
             <View style={styles.listSection}>
               {MOCK_RANKING.slice(3).map(item => (
                 <View key={item.rank} style={styles.listItem}>
@@ -124,7 +138,7 @@ export default function RankingScreen() {
             </View>
           </>
         ) : (
-          /* Timeline */
+          /* 人気コーデ タイムライン */
           <View style={styles.timelineContainer}>
             {MOCK_TIMELINE.map(post => {
               const isLiked = likedTimeline.includes(post.id)
@@ -132,7 +146,11 @@ export default function RankingScreen() {
                 <View key={post.id} style={styles.timelineCard}>
                   <View style={styles.timelineHeader}>
                     <View style={styles.avatar}>
-                      <Text style={{ fontSize: 18 }}>{post.role === "shop" ? "🏪" : "👤"}</Text>
+                      <Ionicons
+                        name={post.role === "shop" ? "storefront-outline" : "person-outline"}
+                        size={20}
+                        color={Colors.textMuted}
+                      />
                     </View>
                     <View>
                       <Text style={styles.timelineUser}>{post.user}</Text>
@@ -179,6 +197,7 @@ const styles = StyleSheet.create({
   tabRow: { flexDirection: "row", marginHorizontal: 20, marginBottom: 12, backgroundColor: Colors.border, borderRadius: 16, padding: 4 },
   tabBtn: { flex: 1, paddingVertical: 8, alignItems: "center", borderRadius: 12 },
   tabBtnActive: { backgroundColor: "#fff" },
+  tabBtnInner: { flexDirection: "row", alignItems: "center", gap: 5 },
   tabBtnText: { fontSize: 13, fontWeight: "700", color: Colors.textMuted },
   tabBtnTextActive: { color: Colors.text },
   periodRow: { flexDirection: "row", gap: 8, paddingHorizontal: 20, marginBottom: 16 },

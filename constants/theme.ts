@@ -27,20 +27,20 @@ export const BODY_TYPES = ["ストレート", "ウェーブ", "ナチュラル"]
 export const PERSONAL_COLORS = ["スプリング", "サマー", "オータム", "ウィンター"]
 export const FACE_TYPES = ["フレッシュ", "キュート", "フェミニン", "クール", "エレガント", "ハンサム"]
 
-// 女性向けスタイル（写真と名前を一致させた）
+// 女性向けスタイル（PAL CLOSET コーデ）
 export const FEMALE_STYLES = [
-  { id: "f1",  image: "https://images.unsplash.com/photo-1554568218-0f1715e72254?w=500&q=80", style: "カジュアル" },
-  { id: "f2",  image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=500&q=80", style: "フェミニン" },
-  { id: "f3",  image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&q=80", style: "ストリート" },
-  { id: "f4",  image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80", style: "オフィス" },
-  { id: "f5",  image: "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=500&q=80", style: "ガーリー" },
-  { id: "f6",  image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=500&q=80", style: "シンプル" },
-  { id: "f7",  image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=500&q=80", style: "モード" },
-  { id: "f8",  image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=500&q=80", style: "スポーティ" },
-  { id: "f9",  image: "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500&q=80", style: "ナチュラル" },
-  { id: "f10", image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=500&q=80", style: "クラシック" },
-  { id: "f11", image: "https://images.unsplash.com/photo-1519699047748-de8e457a634e?w=500&q=80", style: "ボーイッシュ" },
-  { id: "f12", image: "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=500&q=80", style: "モノトーン" },
+  { id: "f1",  image: "https://contents.palcloset.jp/static/images/contents/all_260522_001.jpg", style: "夏先取り" },
+  { id: "f2",  image: "https://contents.palcloset.jp/static/images/contents/all_260521_001.jpg", style: "大人カジュアル" },
+  { id: "f3",  image: "https://contents.palcloset.jp/static/images/contents/all_260520_001.jpg", style: "ワンピース" },
+  { id: "f4",  image: "https://contents.palcloset.jp/static/images/contents/all_260519_001.jpg", style: "着やせコーデ" },
+  { id: "f5",  image: "https://contents.palcloset.jp/static/images/contents/all_260518_001.jpg", style: "ナチュラル" },
+  { id: "f6",  image: "https://contents.palcloset.jp/static/images/contents/all_260517_001.jpg", style: "フレンチカジュアル" },
+  { id: "f7",  image: "https://contents.palcloset.jp/static/images/contents/all_260516_001.jpg", style: "きれいめ" },
+  { id: "f8",  image: "https://contents.palcloset.jp/static/images/contents/all_260515_001.jpg", style: "スタイルアップ" },
+  { id: "f9",  image: "https://contents.palcloset.jp/static/images/contents/all_260514_001.jpg", style: "ガーリー" },
+  { id: "f10", image: "https://contents.palcloset.jp/static/images/contents/all_260513_001.jpg", style: "モノトーン" },
+  { id: "f11", image: "https://contents.palcloset.jp/static/images/contents/all_260512_001.jpg", style: "オフィスカジュアル" },
+  { id: "f12", image: "https://contents.palcloset.jp/static/images/contents/all_260511_001.jpg", style: "シンプル" },
 ]
 
 // 男性向けスタイル（写真と名前を一致させた）
@@ -166,16 +166,16 @@ export const MOCK_RANKING = [
 ]
 
 export const MOCK_TIMELINE = [
-  { id: "t1", user: "PAL CLOSET", role: "shop", shop: "PAL CLOSET", likes: 412,
-    image: "https://contents.palcloset.jp/static/images/contents/all_260522_001.jpg",
-    caption: "40代・50代オトナの夏先取りワードローブ" },
-  { id: "t2", user: "yuki.fashion", role: "user", likes: 234,
-    image: "https://contents.palcloset.jp/static/images/contents/all_260521_001.jpg",
-    caption: "夏を先取り！EARLY SUMMER SALEコーデ" },
-  { id: "t3", user: "PAL CLOSET", role: "shop", shop: "PAL CLOSET", likes: 389,
-    image: "https://contents.palcloset.jp/static/images/contents/all_260520_001.jpg",
-    caption: "この夏、似合わせワンピースでスタイルアップ" },
-  { id: "t4", user: "hana__code", role: "user", likes: 89,
-    image: "https://contents.palcloset.jp/static/images/contents/all_260515_001.jpg",
-    caption: "体型カバーもスタイルアップも叶う着やせパンツ" },
+  { id: "t1", user: "yuki.fashion", role: "user", likes: 521,
+    image: "https://images.wear2.jp/coordinate/bBildLXx/CLqAER22/1778393048_276.jpg",
+    caption: "白レイヤードコーデ🤍 シアーキャミ×ワイドスカートが今年らしい" },
+  { id: "t2", user: "PAL CLOSET", role: "shop", shop: "PAL CLOSET", likes: 438,
+    image: "https://images.wear2.jp/coordinate/qri8rkoo/ZvvXU4Y6/1777129826_276.jpg",
+    caption: "今週の人気コーデ！キャミ×ティアードスカートでガーリーに" },
+  { id: "t3", user: "hana__code", role: "user", likes: 312,
+    image: "https://images.wear2.jp/coordinate/qri8rkoo/ZWmJ1ii5/1775918117_276.jpg",
+    caption: "黒キャミ×ワイドデニムのシンプルコーデ♡ バランスよく着こなすのがポイント" },
+  { id: "t4", user: "mio.style", role: "user", likes: 287,
+    image: "https://images.wear2.jp/coordinate/AAix6kB7/E4mzX3XO/1778061782_276.jpg",
+    caption: "ピンクレース×ブラックデニムのきれいめカジュアル💕" },
 ]

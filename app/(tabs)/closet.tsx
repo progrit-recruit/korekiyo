@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react"
 import {
   View, Text, StyleSheet, TouchableOpacity, ScrollView,
-  SafeAreaView, Modal, TextInput, Image, FlatList, Dimensions, Alert,
+  SafeAreaView, Modal, TextInput, Image, FlatList, Dimensions, Alert, Platform,
 } from "react-native"
 import * as ImagePicker from "expo-image-picker"
+import { CameraView, useCameraPermissions, type BarcodeScanningResult } from "expo-camera"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { Ionicons } from "@expo/vector-icons"
 import { Colors } from "../../constants/theme"
@@ -48,6 +49,10 @@ export default function ClosetScreen() {
   const [newColor, setNewColor] = useState("")
   const [newImage, setNewImage] = useState<string | null>(null)
   const [selectedIds, setSelectedIds] = useState<string[]>([])
+  const [showBarcodeScanner, setShowBarcodeScanner] = useState(false)
+  const [showBarcodeInput, setShowBarcodeInput] = useState(false)
+  const [barcodeInputValue, setBarcodeInputValue] = useState("")
+  const [cameraPermission, requestCameraPermission] = useCameraPermissions()
 
   useEffect(() => {
     ;(async () => {
@@ -81,6 +86,26 @@ export default function ClosetScreen() {
   async function takePhoto() {
     const res = await ImagePicker.launchCameraAsync({ quality: 0.8, aspect: [3, 4] })
     if (!res.canceled) setNewImage(res.assets[0].uri)
+  }
+
+  function handleBarcodeScanned(result: BarcodeScanningResult) {
+    setShowBarcodeScanner(false)
+    const code = result.data.slice(-8)
+    setNewName(`スキャン商品 (${code})`)
+    setNewBrand("（バーコードから取得）")
+  }
+
+  async function openBarcodeScanner() {
+    if (Platform.OS === "web") {
+      setShowBarcodeInput(true)
+      return
+    }
+    const { granted } = await requestCameraPermission()
+    if (granted) {
+      setShowBarcodeScanner(true)
+    } else {
+      Alert.alert("カメラ権限が必要です", "バーコードスキャンにはカメラへのアクセスが必要です")
+    }
   }
 
   function addItem() {
@@ -242,6 +267,10 @@ export default function ClosetScreen() {
                 <Ionicons name="images-outline" size={26} color={Colors.primary} />
                 <Text style={styles.photoBtnText}>ライブラリ</Text>
               </TouchableOpacity>
+              <TouchableOpacity style={styles.photoBtn} onPress={openBarcodeScanner}>
+                <Ionicons name="barcode-outline" size={26} color={Colors.primary} />
+                <Text style={styles.photoBtnText}>バーコード</Text>
+              </TouchableOpacity>
             </View>
             {newImage && (
               <Image source={{ uri: newImage }} style={{ width: "100%", height: 200, borderRadius: 12, marginBottom: 16 }} resizeMode="cover" />
@@ -280,6 +309,67 @@ export default function ClosetScreen() {
             </TouchableOpacity>
           </ScrollView>
         </SafeAreaView>
+      </Modal>
+      {/* バーコードスキャナー (native only) */}
+      <Modal visible={showBarcodeScanner} animationType="slide">
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#000" }}>
+          <CameraView
+            style={{ flex: 1 }}
+            facing="back"
+            onBarcodeScanned={handleBarcodeScanned}
+            barcodeScannerSettings={{ barcodeTypes: ["ean13", "ean8", "qr", "code128", "code39", "upc_a"] }}
+          />
+          {/* スキャン枠 */}
+          <View style={styles.scanOverlay} pointerEvents="none">
+            <View style={styles.scanFrame} />
+            <Text style={styles.scanHint}>バーコードをスキャンしてください</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.scanCloseBtn}
+            onPress={() => setShowBarcodeScanner(false)}
+          >
+            <Ionicons name="close" size={22} color="#333" />
+          </TouchableOpacity>
+        </SafeAreaView>
+      </Modal>
+
+      {/* バーコード手動入力 (web fallback) */}
+      <Modal visible={showBarcodeInput} animationType="fade" transparent>
+        <View style={styles.barcodeInputOverlay}>
+          <View style={styles.barcodeInputCard}>
+            <Text style={styles.barcodeInputTitle}>バーコード番号を入力</Text>
+            <TextInput
+              style={styles.field}
+              value={barcodeInputValue}
+              onChangeText={setBarcodeInputValue}
+              placeholder="例：4901234567890"
+              placeholderTextColor={Colors.textLight}
+              keyboardType="numeric"
+              autoFocus
+            />
+            <View style={{ flexDirection: "row", gap: 12 }}>
+              <TouchableOpacity
+                style={styles.barcodeInputCancel}
+                onPress={() => { setBarcodeInputValue(""); setShowBarcodeInput(false) }}
+              >
+                <Text style={{ color: Colors.textMuted, fontWeight: "600" }}>キャンセル</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.saveBtn, { flex: 1 }]}
+                onPress={() => {
+                  if (barcodeInputValue) {
+                    setNewName(`スキャン商品 (${barcodeInputValue.slice(-8)})`)
+                    setNewBrand("（バーコードから取得）")
+                  }
+                  setBarcodeInputValue("")
+                  setShowBarcodeInput(false)
+                }}
+              >
+                <Text style={styles.saveBtnText}>登録</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
       </Modal>
     </SafeAreaView>
   )
@@ -338,4 +428,34 @@ const styles = StyleSheet.create({
   field: { backgroundColor: Colors.background, borderRadius: 12, paddingHorizontal: 14, paddingVertical: 12, fontSize: 15, color: Colors.text, marginBottom: 16, borderWidth: 1, borderColor: Colors.border },
   saveBtn: { backgroundColor: Colors.primary, paddingVertical: 16, borderRadius: 28, alignItems: "center" },
   saveBtnText: { color: "#fff", fontWeight: "800", fontSize: 16 },
+  // バーコードスキャナー
+  scanOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: "center", alignItems: "center", gap: 20,
+  },
+  scanFrame: {
+    width: 260, height: 160,
+    borderWidth: 2, borderColor: Colors.primary, borderRadius: 12,
+  },
+  scanHint: {
+    color: "#fff", fontSize: 14, fontWeight: "600",
+    backgroundColor: "rgba(0,0,0,0.55)", paddingHorizontal: 18, paddingVertical: 8, borderRadius: 20,
+  },
+  scanCloseBtn: {
+    position: "absolute", top: 60, left: 20,
+    backgroundColor: "rgba(255,255,255,0.92)", borderRadius: 20, padding: 10,
+  },
+  // バーコード手動入力
+  barcodeInputOverlay: {
+    flex: 1, backgroundColor: "rgba(0,0,0,0.5)",
+    justifyContent: "center", alignItems: "center", padding: 24,
+  },
+  barcodeInputCard: {
+    backgroundColor: "#fff", borderRadius: 20, padding: 24, width: "100%",
+  },
+  barcodeInputTitle: { fontSize: 16, fontWeight: "800", color: Colors.text, marginBottom: 16 },
+  barcodeInputCancel: {
+    flex: 1, paddingVertical: 16, borderRadius: 28,
+    borderWidth: 1, borderColor: Colors.border, alignItems: "center",
+  },
 })

@@ -48,15 +48,29 @@ function weatherCodeToIcon(code: string): IoniconName {
   return "cloudy-outline"
 }
 
+type UserProfile = {
+  height: string
+  weight: string
+  bodyType: string
+  personalColor: string
+  faceType: string
+}
+
 export default function AccountScreen() {
   const router = useRouter()
   const [points] = useState(1400)
   const [weather, setWeather] = useState<WeatherInfo | null>(null)
   const [closetCount, setClosetCount] = useState(0)
+  const [profile, setProfile] = useState<UserProfile | null>(null)
 
   useEffect(() => {
     AsyncStorage.getItem("user_closet").then(data => {
       if (data) setClosetCount(JSON.parse(data).length)
+    })
+    AsyncStorage.getItem("user_profile").then(data => {
+      if (data) {
+        try { setProfile(JSON.parse(data)) } catch { /* ignore */ }
+      }
     })
   }, [])
 
@@ -172,10 +186,26 @@ export default function AccountScreen() {
         {/* Settings */}
         <Text style={styles.sectionTitle}>プロフィール設定</Text>
         <View style={styles.card}>
-          <Row icon="resize-outline" label="身長・体重" value="158cm / 50kg" />
-          <Row icon="body-outline" label="骨格タイプ" value="ウェーブ" />
-          <Row icon="color-palette-outline" label="パーソナルカラー" value="スプリング" />
-          <Row icon="happy-outline" label="顔タイプ" value="フレッシュ" />
+          <Row
+            icon="resize-outline"
+            label="身長・体重"
+            value={profile ? `${profile.height}cm / ${profile.weight}kg` : "未設定"}
+          />
+          <Row
+            icon="body-outline"
+            label="骨格タイプ"
+            value={profile?.bodyType && profile.bodyType !== "unknown" ? profile.bodyType : profile?.bodyType === "unknown" ? "わからない" : "未設定"}
+          />
+          <Row
+            icon="color-palette-outline"
+            label="パーソナルカラー"
+            value={profile?.personalColor && profile.personalColor !== "unknown" ? profile.personalColor : profile?.personalColor === "unknown" ? "わからない" : "未設定"}
+          />
+          <Row
+            icon="happy-outline"
+            label="顔タイプ"
+            value={profile?.faceType && profile.faceType !== "unknown" ? profile.faceType : profile?.faceType === "unknown" ? "わからない" : "未設定"}
+          />
         </View>
 
         <Text style={styles.sectionTitle}>診断</Text>

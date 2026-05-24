@@ -4,6 +4,7 @@ import {
   SafeAreaView, TextInput, KeyboardAvoidingView, Platform,
 } from "react-native"
 import { useRouter } from "expo-router"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 import { Colors, BODY_TYPES, PERSONAL_COLORS, FACE_TYPES } from "../../constants/theme"
 
 function Chip({ label, selected, onPress }: { label: string; selected: boolean; onPress: () => void }) {
@@ -111,7 +112,15 @@ export default function ProfileScreen() {
           <TouchableOpacity
             style={[styles.btn, !canProceed && styles.btnDisabled]}
             disabled={!canProceed}
-            onPress={() => router.push("/onboarding/mood")}
+            onPress={async () => {
+            await AsyncStorage.setItem("user_profile", JSON.stringify({
+              height, weight,
+              bodyType: bodyType || "",
+              personalColor: personalColor || "",
+              faceType: faceType || "",
+            }))
+            router.push("/onboarding/mood")
+          }}
           >
             <Text style={styles.btnText}>次へ →</Text>
           </TouchableOpacity>
